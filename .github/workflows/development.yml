@@ -24,12 +24,13 @@ jobs:
         uses: actions/setup-go@v2
         with:
           go-version: ${{ matrix.go-version }}
-
-      - name: Setup Folder
-        run: cd ${{ matrix.application-name }}
       
       - name: Install dependencies
-        run: go mod download
+        run: |
+          cd ${{ matrix.application-name }}
+          go mod download
 
       - name: Compile
-        run: go build -o app .
+        run: |
+          cd ${{ matrix.application-name }}
+          go build -o app .
